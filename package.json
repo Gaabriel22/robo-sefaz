@@ -1,0 +1,21 @@
+{
+  "name": "robo-sefaz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "puppeteer": "^24.1.1"
+  },
+  "devDependencies": {
+    "@types/exceljs": "^0.5.3",
+    "@types/puppeteer": "^5.4.7",
+    "typescript": "^5.7.3"
+  }
+}
