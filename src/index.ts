@@ -1,5 +1,5 @@
 import { Page } from "puppeteer"
-import { acessarSefaz } from "./modules/acessarSefaz"
+import { acessarSefaz, fecharNavegador } from "./modules/acessarSefaz"
 import { lerNumerosSerie } from "./modules/lerNumeroSerie"
 import { navegarMenu } from "./modules/navegarMenu"
 import {
@@ -10,7 +10,7 @@ import {
 import { contarCupons } from "./modules/contarCupons"
 import { verificarAlerta } from "./modules/verificarAlerta"
 
-async function main() {
+export async function main() {
   try {
     const page: Page = await acessarSefaz()
     await navegarMenu(page)
@@ -26,7 +26,7 @@ async function main() {
     }[] = []
 
     for (const { numeroSerie, pdv } of pdvsENumerosSerie) {
-      console.log(`Consultando PDV: ${pdv} - Número de Série: ${numeroSerie}`)
+      console.log(`Consultando PDV: ${pdv} - Numero de Serie: ${numeroSerie}`)
 
       await preencherNumeroSerie(page, numeroSerie)
       await clicarPesquisar(page)
@@ -36,7 +36,7 @@ async function main() {
       try {
         await page.waitForSelector(
           '[id^="conteudo_grvConsultarLotesEnviados_lkbNumeroRecibo_"]',
-          { visible: true, timeout: 5000 }
+          { visible: true, timeout: 3000 }
         )
         const totalCupons = await contarCupons(page)
         console.log(
@@ -52,13 +52,19 @@ async function main() {
       }
     }
 
-    console.log("\nResumo Final das Consultas:")
+    resultados.sort((a, b) => parseInt(a.pdv) - parseInt(b.pdv))
+
+    console.log("\nResumo Final da Consulta:")
     resultados.forEach(({ pdv, totalCupons }) => {
       console.log(`PDV: ${pdv} - ${totalCupons} cupons.`)
     })
+
+    await fecharNavegador()
+
+    return resultados
   } catch (error) {
     console.error("Erro no fluxo principal:", error)
+    await fecharNavegador()
+    throw error
   }
 }
-
-main()
