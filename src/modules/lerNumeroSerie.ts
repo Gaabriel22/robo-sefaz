@@ -5,7 +5,7 @@ export async function lerNumerosSerie(): Promise<
 > {
   const workbook = new ExcelJS.Workbook()
   await workbook.xlsx.readFile(
-    "W:/CASTANHA/PLANILHAS/Conferência Diaria SEFAZ att.xlsx"
+    // caminho da planilha aqui
   )
 
   const worksheet = workbook.getWorksheet(1)
