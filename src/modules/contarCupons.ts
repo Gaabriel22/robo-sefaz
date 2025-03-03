@@ -28,7 +28,7 @@ export async function contarCupons(page: Page): Promise<number> {
 
       console.log(`Lote ${loteId} possui ${quantidadeCupons} cupons.`)
 
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 2000))
 
       await page.waitForSelector("#conteudo_btnSair", { visible: true })
       await page.click("#conteudo_btnSair")
@@ -43,7 +43,7 @@ export async function contarCupons(page: Page): Promise<number> {
     const botaoProximaExiste = await page.$("#conteudo_lnkBtnProxima")
     if (botaoProximaExiste) {
       await page.click("#conteudo_lnkBtnProxima")
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve) => setTimeout(resolve, 3000))
       await page.waitForSelector(
         '[id^="conteudo_grvConsultarLotesEnviados_lkbNumeroRecibo_"]',
         { visible: true, timeout: 5000 }

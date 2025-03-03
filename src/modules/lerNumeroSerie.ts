@@ -5,7 +5,7 @@ export async function lerNumerosSerie(): Promise<
 > {
   const workbook = new ExcelJS.Workbook()
   await workbook.xlsx.readFile(
-    // caminho da planilha aqui
+    "Caminho/da/planilha"
   )
 
   const worksheet = workbook.getWorksheet(1)

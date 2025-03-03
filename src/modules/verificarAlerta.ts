@@ -5,9 +5,13 @@ export async function verificarAlerta(page: Page): Promise<void> {
     try {
       await page.waitForSelector(".ui-dialog-buttonset button.ui-button", {
         visible: true,
-        timeout: 5000,
+        timeout: 3000,
       })
 
+      await page.waitForSelector(".ui-dialog-buttonset button.ui-button", {
+        visible: true,
+      })
+      await page.focus(".ui-dialog-buttonset button.ui-button")
       await page.click(".ui-dialog-buttonset button.ui-button")
 
       console.log("Caixa de alerta fechada")
@@ -18,7 +22,7 @@ export async function verificarAlerta(page: Page): Promise<void> {
 
       resolve()
     } catch (error) {
-      console.log("Caixa de alerta não encontrada ou outro erro:")
+      console.log("Caixa de alerta nao encontrada ou outro erro:")
 
       resolve()
     }
